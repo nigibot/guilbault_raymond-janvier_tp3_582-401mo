@@ -14,4 +14,12 @@ Si toutes les souris ont été éliminés, le joueur gagne. (Bonne fin)
 Derrière la télévision se trouve un trou menant au «palais des souris». Le joueur, une fois à l'intérieur, doit lancer des bombes 10 fois sur le roi souris pour pouvoir obtenir une clé permettant de les désactiver avant qu'elles n'explosent (minuteur de ce niveau).
 
 # Moodboard
-[Moodboard]("./0_preprod/images/moodboard.png")
+## Visuel
+![Moodboard](./0_preprod/images/moodboard.png)
+## Audio
+
+# Carte de l'environnement
+![Carte](./0_preprod/images/carte.jpg)
+
+# Schéma D'interactivité
+![Schema](./0_preprod/images/schema.png)
