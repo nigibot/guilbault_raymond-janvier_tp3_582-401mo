@@ -20,6 +20,17 @@ Si non, le joueur perd pour de vrai. (Pire fin)
 ## Visuel
 ![Moodboard](./0_preprod/images/moodboard.png)
 ## Audio
+**Musique**
+
+https://youtu.be/bpqGmZgVWDI
+https://youtu.be/l8MNi-oi5z4
+https://youtu.be/6P5iPI1FjO8
+https://youtu.be/u2xW23u4qEY
+
+**Effets Sonores**
+
+https://youtu.be/-k5KVWu4txk
+https://youtu.be/mpFCFmnIeLQ
 
 # Carte de l'environnement
 ![Carte](./0_preprod/images/carte.jpg)
