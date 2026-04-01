@@ -15,4 +15,12 @@ public class grab : MonoBehaviour
     {
         
     }
+
+    function TriggerTorche(Gameobject torche) {
+        torche.SetActive(true);
+    }
+
+    function TriggerTorcheFalse(Gameobject torche) {
+        torche.SetActive(false);
+    }
 }
