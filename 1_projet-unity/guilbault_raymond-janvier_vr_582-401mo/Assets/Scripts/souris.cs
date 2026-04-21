@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class AgentNavigation : MonoBehaviour
 {
     public GameObject objetCible;
+    public GameObject controleur;
     public GameObject[] trous;
 
     NavMeshAgent agent;
@@ -15,6 +16,8 @@ public class AgentNavigation : MonoBehaviour
     {
         // Prends une référence à la composante Nav Mesh Agent.
         agent = GetComponent<NavMeshAgent>();
+        controleur = GameObject.Find("contrôleur souris");
+        trous = controleur.GetComponent<trou_souris>().trous;
         int randomIndex = Random.Range(0, trous.Length-1);
         objetCible = trous[randomIndex];
         // À chaque 2 seconds, la route est recalculée.
@@ -34,7 +37,7 @@ public class AgentNavigation : MonoBehaviour
         {
             GameObject fromage = other.gameObject.transform.parent.gameObject;
             agent.speed = 0f;
-            fromage.transform.localScale += new Vector3(0.8f, 0.8f, 0.8f);
+            fromage.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             fromageHealth--;
             if (fromageHealth <= 0)
             {

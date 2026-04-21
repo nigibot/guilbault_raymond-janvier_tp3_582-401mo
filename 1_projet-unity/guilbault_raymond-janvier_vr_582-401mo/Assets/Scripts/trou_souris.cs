@@ -28,7 +28,6 @@ public class trou_souris : MonoBehaviour
         {
             int randomIndex = Random.Range(0, trous.Length-1);
             GameObject newMouse = Instantiate(prefabSouris, trous[randomIndex].transform.position, Quaternion.identity);
-            newMouse.transform.parent = trous[randomIndex].transform;
         }
     }
 }

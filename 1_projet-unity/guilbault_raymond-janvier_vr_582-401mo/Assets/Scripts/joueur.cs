@@ -37,4 +37,12 @@ public class joueur : MonoBehaviour
     {
         return Physics.CheckSphere(transform.position, 0.2f, groundLayer); 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("zone_souris1"))
+        {
+            GameObject[] trous_souris = GameObject.Find("contrôleur souris").GetComponent<trou_souris>().trous;
+        }
+    }
 }
