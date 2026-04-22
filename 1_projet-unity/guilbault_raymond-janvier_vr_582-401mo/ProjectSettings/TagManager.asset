@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - zone_souris1
+  - zone_souris2
+  - zone_souris3
+  - zone_souris4
+  - attaque_souris
+  - souris_fromage
+  - souris_joueur
   layers:
   - Default
   - TransparentFX

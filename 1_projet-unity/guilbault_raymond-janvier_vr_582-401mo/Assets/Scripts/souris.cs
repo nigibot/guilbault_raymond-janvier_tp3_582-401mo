@@ -16,7 +16,7 @@ public class AgentNavigation : MonoBehaviour
     {
         // Prends une référence à la composante Nav Mesh Agent.
         agent = GetComponent<NavMeshAgent>();
-        controleur = GameObject.Find("contrôleur souris");
+        controleur = GameObject.Find("Controleur Souris");
         trous = controleur.GetComponent<trou_souris>().trous;
         int randomIndex = Random.Range(0, trous.Length-1);
         objetCible = trous[randomIndex];
