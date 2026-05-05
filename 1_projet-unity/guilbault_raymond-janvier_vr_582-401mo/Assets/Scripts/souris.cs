@@ -9,12 +9,8 @@ public class AgentNavigation : MonoBehaviour
     public GameObject controleur;
     public GameObject[] trous;
 
-    public AudioClip sons_arrivee;
-
     NavMeshAgent agent;
     int fromageHealth = 5;
-
-    private AudioSource audioSource;
 
     void Start()
     {
@@ -25,10 +21,7 @@ public class AgentNavigation : MonoBehaviour
         int randomIndex = Random.Range(0, trous.Length-1);
         objetCible = trous[randomIndex];
         // À chaque 2 seconds, la route est recalculée.
-
         InvokeRepeating("RecalculerRoute", 1f, 2f);
-        audioSource = GetComponent<AudioSource>();
-        audioSource.Play();
     }
 
     public void RecalculerRoute()

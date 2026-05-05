@@ -11,8 +11,6 @@ TagManager:
   - attaque_souris
   - souris_fromage
   - souris_joueur
-  - souris
-  - Collision
   layers:
   - Default
   - TransparentFX
