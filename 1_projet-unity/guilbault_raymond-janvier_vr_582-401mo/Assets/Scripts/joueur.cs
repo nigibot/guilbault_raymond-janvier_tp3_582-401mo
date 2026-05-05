@@ -13,6 +13,8 @@ public class joueur : MonoBehaviour
     private float gravity = Physics.gravity.y;
     private Vector3 mouvement;
 
+    public int mouseCounter = 20;
+
     private void Update()
     {
         bool _isGrounded = isGrounded(); 

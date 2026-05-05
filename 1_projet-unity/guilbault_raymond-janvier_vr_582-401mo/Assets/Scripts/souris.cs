@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class AgentNavigation : MonoBehaviour
 {
     public GameObject objetCible;
     public GameObject controleur;
     public GameObject[] trous;
+    public GameObject joueur;
 
     public AudioClip sons_arrivee;
 
@@ -16,19 +18,42 @@ public class AgentNavigation : MonoBehaviour
 
     private AudioSource audioSource;
 
+    public bool isGrabbed = false;
+    public XRGrabInteractable grabComp;
+
     void Start()
     {
         // Prends une référence à la composante Nav Mesh Agent.
         agent = GetComponent<NavMeshAgent>();
+        joueur = GameObject.Find("Locomotion System");
         controleur = GameObject.Find("Controleur Souris");
         trous = controleur.GetComponent<trou_souris>().trous;
         int randomIndex = Random.Range(0, trous.Length-1);
         objetCible = trous[randomIndex];
+        grabComp = GetComponent<XRGrabInteractable>();
+        grabComp.selectEntered.AddListener(OnGrab);
+        grabComp.selectExited.AddListener(OnRelease);
         // À chaque 2 seconds, la route est recalculée.
 
         InvokeRepeating("RecalculerRoute", 1f, 2f);
         audioSource = GetComponent<AudioSource>();
         audioSource.Play();
+    }
+
+    private void OnDestroy()
+    {
+        grabComp.selectEntered.RemoveListener(OnGrab);
+        grabComp.selectExited.RemoveListener(OnRelease);
+    }
+
+    private void OnGrab(SelectEnterEventArgs args)
+    {
+        isGrabbed = true;
+    }
+
+    private void OnRelease(SelectExitEventArgs args)
+    {
+        isGrabbed = false;
     }
 
     public void RecalculerRoute()
@@ -65,6 +90,12 @@ public class AgentNavigation : MonoBehaviour
             objetCible = trous[randomIndex];
             agent.speed = 5f;
             RecalculerRoute();
+        }
+        
+        if (other.gameObject.CompareTag("bouche") && isGrabbed == true)
+        {
+            joueur.GetComponent<joueur>().mouseCounter -= 1;
+            Destroy(gameObject);
         }
 
         if (other.gameObject.CompareTag(objetCible.tag))

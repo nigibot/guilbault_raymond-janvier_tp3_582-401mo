@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 1d0b02f9dbb15b94fa2d383e8e3256a5
-=======
-guid: 1f808e3927567b14f8e79f3ffc8f7d8e
->>>>>>> parent of cfa90a1 (Revert "Integration sons (Cours 13)")
+guid: 6d11b06e1776c8644af1590d2c3a77b2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
