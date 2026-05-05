@@ -13,6 +13,7 @@ TagManager:
   - souris_joueur
   - souris
   - Collision
+  - bouche
   layers:
   - Default
   - TransparentFX
