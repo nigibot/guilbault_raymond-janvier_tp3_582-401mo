@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class joueur : MonoBehaviour
 {
@@ -65,10 +66,12 @@ public class joueur : MonoBehaviour
     private void Victoire()
     {
         Debug.Log("Victoire !");
+        SceneManager.LoadScene("victoire");
     }
 
     private void Defaite()
     {
         Debug.Log("Défaite !");
+        SceneManager.LoadScene("defaite");
     }
 }
