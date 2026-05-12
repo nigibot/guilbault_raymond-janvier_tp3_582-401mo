@@ -1,13 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<<< HEAD:1_projet-unity/guilbault_raymond-janvier_vr_582-401mo/Assets/Models/horloge.fbx.meta
-guid: 74cb97a6acb0b184ea21f0f1c6d43d44
-========
-guid: 67f37c6c2c27597438e76b23f70d979d
->>>>>>>> 7fddb408fc1cd120533170b2021a337f1a0793e6:1_projet-unity/guilbault_raymond-janvier_vr_582-401mo/Assets/Models/chaise.fbx.meta
-=======
-guid: 8279bf7a86873fa499c8b30180251206
->>>>>>> 7fddb408fc1cd120533170b2021a337f1a0793e6
+guid: 35fae3ceafb73c64cb4f381ce02815e9
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
