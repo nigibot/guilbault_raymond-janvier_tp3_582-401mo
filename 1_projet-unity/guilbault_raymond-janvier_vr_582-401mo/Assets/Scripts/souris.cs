@@ -16,28 +16,56 @@ public class AgentNavigation : MonoBehaviour
     NavMeshAgent agent;
     int fromageHealth = 5;
 
-    private AudioSource audioSource;
+    private AudioSource audioSource1;
+    private AudioSource audioSource2;
 
     public bool isGrabbed = false;
     public XRGrabInteractable grabComp;
 
+    public bool assomage = false;
+    private int assomage_timer = 5;
+
+
     void Start()
     {
-        // Prends une référence à la composante Nav Mesh Agent.
         agent = GetComponent<NavMeshAgent>();
         joueur = GameObject.Find("Locomotion System");
         controleur = GameObject.Find("Controleur Souris");
-        trous = controleur.GetComponent<trou_souris>().trous;
-        int randomIndex = Random.Range(0, trous.Length-1);
-        objetCible = trous[randomIndex];
+
         grabComp = GetComponent<XRGrabInteractable>();
         grabComp.selectEntered.AddListener(OnGrab);
         grabComp.selectExited.AddListener(OnRelease);
-        // À chaque 2 seconds, la route est recalculée.
 
+        // Prends une référence à la composante Nav Mesh Agent.
+        trous = controleur.GetComponent<trou_souris>().trous;
+        int randomIndex = Random.Range(0, trous.Length-1);
+        objetCible = trous[randomIndex];
+        
+        // À chaque 2 seconds, la route est recalculée.
         InvokeRepeating("RecalculerRoute", 1f, 2f);
-        audioSource = GetComponent<AudioSource>();
-        audioSource.Play();
+        audioSource1 = GetComponent<AudioSource>();
+        audioSource2 = GetComponent<AudioSource>();
+        audioSource1.Play();
+    }
+
+    void Update() {
+        if (assomage == true) {
+            agent.speed = 0;
+            float rotateSpeed = 100.0f;
+            transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+            InvokeRepeating("assomageTime", 1f, 1f);
+        }
+    }
+
+    private void assomageTime()
+    {
+        assomage_timer--;
+        if (assomage_timer <= 0) {
+            assomage = false;
+            RecalculerRoute();
+            agent.speed = 10f;
+            assomage_timer = 5;
+        }
     }
 
     private void OnDestroy()
@@ -60,7 +88,7 @@ public class AgentNavigation : MonoBehaviour
     {
         // Calcule une nouvelle route et commence à se déplacer
         // vers la position de la destination.
-        agent.SetDestination(objetCible.transform.position);
+        agent.SetDestination(objetCible.transform.parent.position);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -68,12 +96,33 @@ public class AgentNavigation : MonoBehaviour
         if (other.gameObject.CompareTag("attaque_souris"))
         {
             GameObject fromage = other.gameObject.transform.parent.gameObject;
-            agent.speed = 0f;
-            fromage.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            fromageHealth--;
-            if (fromageHealth <= 0)
-            {
-                Destroy(fromage);
+            int fromageHealthRn = fromageHealth;
+            if (fromage.GetComponent<Rigidbody>().velocity.magnitude <= 0) {
+                agent.speed = 0f;
+                fromage.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                if (fromageHealth == fromageHealthRn) {
+                    fromageHealth--;
+                }
+                if (fromageHealth <= 0)
+                {
+                    Destroy(fromage);
+                    int randomIndex = Random.Range(0, trous.Length-1);
+                    objetCible = trous[randomIndex];
+                    RecalculerRoute();
+                    agent.speed = 10f;
+                }
+            }
+            if (fromage.GetComponent<Rigidbody>().velocity.magnitude > 0) {
+                assomage = true;
+                assomage_timer = 5;
+            }
+        }
+
+        if (other.gameObject.CompareTag("assommage"))
+        {
+            if (other.gameObject.GetComponent<Rigidbody>().velocity.magnitude > 0) {
+                assomage = true;
+                assomage_timer = 5;
             }
         }
 
@@ -88,7 +137,7 @@ public class AgentNavigation : MonoBehaviour
         {
             int randomIndex = Random.Range(0, trous.Length-1);
             objetCible = trous[randomIndex];
-            agent.speed = 5f;
+            agent.speed = 10f;
             RecalculerRoute();
         }
         
