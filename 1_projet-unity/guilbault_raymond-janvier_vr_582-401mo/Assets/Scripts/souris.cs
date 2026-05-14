@@ -44,15 +44,12 @@ public class AgentNavigation : MonoBehaviour
         // À chaque 2 seconds, la route est recalculée.
         InvokeRepeating("RecalculerRoute", 1f, 2f);
         audioSource1 = GetComponent<AudioSource>();
-        audioSource2 = GetComponent<AudioSource>();
         audioSource1.Play();
     }
 
     void Update() {
         if (assomage == true) {
             agent.speed = 0;
-            float rotateSpeed = 100.0f;
-            transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
             InvokeRepeating("assomageTime", 1f, 1f);
         }
     }
@@ -89,6 +86,7 @@ public class AgentNavigation : MonoBehaviour
         // Calcule une nouvelle route et commence à se déplacer
         // vers la position de la destination.
         agent.SetDestination(objetCible.transform.parent.position);
+        Debug.Log(objetCible);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -137,7 +135,7 @@ public class AgentNavigation : MonoBehaviour
         {
             int randomIndex = Random.Range(0, trous.Length-1);
             objetCible = trous[randomIndex];
-            agent.speed = 10f;
+            agent.speed = 15f;
             RecalculerRoute();
         }
         
@@ -145,6 +143,8 @@ public class AgentNavigation : MonoBehaviour
         {
             joueur.GetComponent<joueur>().mouseCounter -= 1;
             Destroy(gameObject);
+            audioSource2 = other.gameObject.GetComponent<AudioSource>();
+            audioSource2.Play();
         }
 
         if (other.gameObject.CompareTag(objetCible.tag))
