@@ -19,7 +19,7 @@ public class ui : MonoBehaviour
 
     public void jouer()
     {
-        SceneManager.LoadScene("maison");
+        SceneManager.LoadScene("jeu");
     }
 
     public void menu()

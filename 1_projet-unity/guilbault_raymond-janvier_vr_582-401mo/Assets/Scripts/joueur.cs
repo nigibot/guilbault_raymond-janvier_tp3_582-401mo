@@ -50,7 +50,9 @@ public class joueur : MonoBehaviour
 
     private void Heure()
     {
-        Compteur--;
+        if (SceneManager.GetActiveScene().name == "jeu") {
+            Compteur--;
+        }
     }
 
     private void Jump()
